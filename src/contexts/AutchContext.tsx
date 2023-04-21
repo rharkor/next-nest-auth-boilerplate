@@ -56,10 +56,16 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 
   const _getUser = useCallback(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    const user = await api.fetch("auth/me");
-    setUser(user);
-  }, []);
+    try {
+      const user = await api.fetch("auth/me");
+      setUser(user);
+    } catch (err) {
+      // Go to login page
+      localStorage.removeItem("token");
+      setIsLogged(false);
+      await goTo("/login");
+    }
+  }, [goTo]);
 
   const login = useCallback(
     async ({ email, password }: { email: string; password: string }) => {
