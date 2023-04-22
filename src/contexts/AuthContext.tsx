@@ -96,15 +96,12 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     if (token) {
       setIsLogged(true);
       await _getUser();
-      if (router.pathname === "/login") {
-        await goTo("/");
-      }
     } else {
       await goTo("/login");
       setIsLogged(false);
     }
     setInitialLoadFinished(true);
-  }, [_getUser, goTo, router]);
+  }, [_getUser, goTo]);
 
   useEffect(() => {
     _handleInitialLoad();
