@@ -61,7 +61,6 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
       setUser(user);
     } catch (err) {
       // Go to login page
-      localStorage.removeItem("token");
       setIsLogged(false);
       await goTo("/login");
     }
