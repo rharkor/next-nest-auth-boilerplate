@@ -90,7 +90,7 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     goTo("/login");
   }, [goTo]);
 
-  const _handleInitialLoad = useCallback(async () => {
+  const _handleInitialLoad = async () => {
     const token = localStorage.getItem("token");
     if (token) {
       setIsLogged(true);
@@ -100,11 +100,12 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
       setIsLogged(false);
     }
     setInitialLoadFinished(true);
-  }, [_getUser, goTo]);
+  };
 
   useEffect(() => {
     _handleInitialLoad();
-  }, [_handleInitialLoad]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   api.updateToken = () => goTo("/login");
 
