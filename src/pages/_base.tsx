@@ -1,5 +1,5 @@
 import LoadingModal from "@/components/LoadingModal";
-import { useAuth } from "@/contexts/AutchContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { FC, PropsWithChildren } from "react";
 
 const Base: FC<PropsWithChildren> = ({ children }) => {
