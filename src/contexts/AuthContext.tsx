@@ -69,9 +69,13 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const login = useCallback(
     async ({ email, password }: { email: string; password: string }) => {
       const loginPromise = new Promise<void>(async (resolve, reject) => {
-        await _login({ email, password });
-        await _getUser();
-        resolve();
+        try {
+          await _login({ email, password });
+          await _getUser();
+          resolve();
+        } catch (err) {
+          reject(err);
+        }
       });
       await toast.promise(loginPromise, {
         loading: "Loading...",
